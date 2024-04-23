@@ -6,7 +6,7 @@ import pytz
 # initialize window
 
 root = tk.Tk()
-root.geometry("400x400")  # size of the window by default
+root.geometry("400x500")  # size of the window by default
 root.resizable(0, 0)  # to make the window size fixed
 root.title("Weather App")  # title of window
 
@@ -18,6 +18,7 @@ def time_format_for_location(utc_with_tz):
     return local_time.time()
 
 # style window
+
 
 city_value = tk.StringVar(root, "")
 
@@ -34,10 +35,12 @@ with open("API_key.txt") as key:
     api_key = key.read()
 
 
-def show_weather():
+def show_weather(city_name=None):
     # Get city name from user from the input field (later in the code)
-    city_name = city_value.get()
-    weather_url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid='+api_key  # API url
+    if not city_name:
+        city_name = city_value.get()
+    base_url = 'http://api.openweathermap.org/data/2.5/weather?q='
+    weather_url = base_url + city_name + '&appid=' + api_key  # API url
     response = requests.get(weather_url)  # Get the response from fetched url
     weather_info = response.json()  # changing response from json to python readable
     tfield.delete("1.0", "end")  # to clear the text field for every new output
@@ -89,7 +92,8 @@ def show_weather():
     tfield.insert("1.0", weather)  # to insert or send value in our Text Field to display output
 
 
-tk.Button(root, command=show_weather, text="Check Weather", font="Arial 10", bg='lightblue', fg='black', activebackground="teal", padx=5, pady=5).pack(pady=20)
+tk.Button(root, command=show_weather, text="Check Weather", font="Arial 10", bg='lightblue',
+          fg='black', activebackground="teal", padx=5, pady=5).pack(pady=20)
 
 # Displaying weather data
 
@@ -97,5 +101,21 @@ weather_now = tk.Label(root, text="The Weather is: ", font='arial 12 bold').pack
 
 tfield = tk.Text(root, width=46, height=10)
 tfield.pack()
+
+fav1 = tk.Button(root, command=lambda: show_weather("Avignon"), text="Avignon", font="Arial 10", 
+                 bg='lightyellow', fg='black', activebackground="teal", padx=5, pady=5)
+
+
+fav2 = tk.Button(root, command=lambda: show_weather("Kitzbühel"), text="Kitzbühel",
+                 font="Arial 10", bg='thistle', fg='black', activebackground="teal",
+                 padx=5, pady=5)
+
+fav3 = tk.Button(root, command=lambda: show_weather("Amsterdam"), text="Amsterdam",
+                 font="Arial 10", bg='aquamarine', fg='black', activebackground="teal",
+                 padx=5, pady=5)
+
+fav1.pack(side="left", expand=True)
+fav2.pack(side="left", expand=True)
+fav3.pack(side="left", expand=True)
 
 root.mainloop()
