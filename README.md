@@ -11,6 +11,7 @@ The packages that need to be installed additionally to Python are
 - requests
 - datetime
 - pytz
+
 The full list of dependencies can be found in and installed directly from the requirements document.
 
 ```bash
@@ -37,8 +38,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Attribution
 
-This project was inspired by Pranjal Srivastava. 
-Article: https://www.askpython.com/python/examples/gui-weather-app-in-python
+This project was inspired by the following [article](https://www.askpython.com/python/examples/gui-weather-app-in-python) by Pranjal Srivastava.
 
 
 ## License
