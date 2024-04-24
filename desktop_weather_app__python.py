@@ -17,7 +17,8 @@ with open("API_key.txt") as key:
 
 def show_weather(city_name: str = None):
     """
-    Get city name from user from the input field (later in the code)
+    Get city name from user from the input field, retrieve weather data
+    for specified city and display it in text field.
     """
     if not city_name:
         city_name = city_value.get()
@@ -45,7 +46,7 @@ def show_weather(city_name: str = None):
         
         # ----------assign values to weather varaible, to be displayed as output
         weather = f"""
-        Weather of: {city_name}
+        Weather of: {city_name.title()}
         Temperature (Celsius): {temp}°
         Feels like in (Celsius): {feels_like_temp}°
         Humidity: {humidity}%
@@ -79,10 +80,9 @@ city_value = tk.StringVar(root, "")
 city_head = tk.Label(root, text='Enter City Name', font='Arial 12 bold').pack(pady=10)
 inp_city = tk.Entry(root, textvariable=city_value, width=24, font='Arial 14 bold').pack()
 
-
 generate_weather = tk.Button(root, command=show_weather, text="Check Weather", font="Arial 10",
                              bg='lightblue', fg='black', activebackground="teal", padx=5,
-                             pady=5).pack(pady=20).bind("<Return>")
+                             pady=5).pack(pady=20)
 
 weather_now = tk.Label(root, text="The Weather is: ", font='arial 12 bold').pack(pady=10)
 tfield = tk.Text(root, width=46, height=10)
